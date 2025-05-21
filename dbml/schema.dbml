@@ -1,0 +1,30 @@
+// Database schema for Shared To-Do List application
+
+Table users {
+  id UUID [pk]
+  email String [unique, not null]
+  password String [not null]
+  name String [not null]
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+}
+
+Table tasks {
+  id UUID [pk]
+  title String [not null]
+  description String
+  completed Boolean [default: false]
+  user_id UUID [not null, ref: > users.id]
+  created_at DateTime [default: `now()`]
+  updated_at DateTime [default: `now()`]
+}
+
+Table task_shares {
+  task_id UUID [not null, ref: > tasks.id]
+  user_id UUID [not null, ref: > users.id]
+  created_at DateTime [default: `now()`]
+  
+  indexes {
+    (task_id, user_id) [pk]
+  }
+}
