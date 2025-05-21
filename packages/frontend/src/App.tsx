@@ -5,7 +5,6 @@ import Login from './pages/Login';
 import Tasks from './pages/Tasks';
 import './App.css';
 
-// Protected route component
 const ProtectedRoute: React.FC<{ element: React.ReactElement }> = ({ element }) => {
   const { user, loading } = useAuth();
   

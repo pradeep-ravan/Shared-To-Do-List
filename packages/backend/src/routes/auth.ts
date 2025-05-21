@@ -1,9 +1,7 @@
-// src/routes/auth.ts
 import { FastifyInstance } from 'fastify';
 import { signup, login } from '../controllers/auth';
 
 export default async function authRoutes(fastify: FastifyInstance) {
-  // Register route for user signup
   fastify.post('/signup', {
     schema: {
       body: {
@@ -18,7 +16,6 @@ export default async function authRoutes(fastify: FastifyInstance) {
     }
   }, signup);
 
-  // Register route for user login
   fastify.post('/login', {
     schema: {
       body: {

@@ -12,25 +12,21 @@ const server = fastify({
   logger: true
 });
 
-// Initialize Prisma client
 export const prisma = new PrismaClient();
 
-// Register plugins
 server.register(cors, {
   origin: true,
   credentials: true
 });
 
-// Register routes
+
 server.register(authRoutes, { prefix: '/api/auth' });
 server.register(taskRoutes, { prefix: '/api/tasks' });
 
-// Health check route
 server.get('/health', async () => {
   return { status: 'ok' };
 });
 
-// Start the server
 const start = async () => {
   try {
     await server.listen({ port: Number(process.env.PORT) || 3000, host: '0.0.0.0' });

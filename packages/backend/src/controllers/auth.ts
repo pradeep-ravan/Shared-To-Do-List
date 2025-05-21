@@ -18,7 +18,6 @@ export const signup = async (request: FastifyRequest<{ Body: SignupBody }>, repl
   try {
     const { email, password, name } = request.body;
     
-    // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email }
     });
@@ -27,10 +26,8 @@ export const signup = async (request: FastifyRequest<{ Body: SignupBody }>, repl
       return reply.status(400).send({ message: 'User already exists' });
     }
     
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
     
-    // Create new user
     const user = await prisma.user.create({
       data: {
         email,
@@ -39,7 +36,6 @@ export const signup = async (request: FastifyRequest<{ Body: SignupBody }>, repl
       }
     });
     
-    // Generate JWT token
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, {
       expiresIn: '24h'
     });
@@ -61,7 +57,6 @@ export const login = async (request: FastifyRequest<{ Body: LoginBody }>, reply:
   try {
     const { email, password } = request.body;
     
-    // Find user
     const user = await prisma.user.findUnique({
       where: { email }
     });
@@ -70,14 +65,12 @@ export const login = async (request: FastifyRequest<{ Body: LoginBody }>, reply:
       return reply.status(401).send({ message: 'Invalid credentials' });
     }
     
-    // Verify password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     
     if (!isPasswordValid) {
       return reply.status(401).send({ message: 'Invalid credentials' });
     }
     
-    // Generate JWT token
     const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET as string, {
       expiresIn: '24h'
     });

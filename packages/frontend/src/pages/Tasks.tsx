@@ -200,7 +200,6 @@ const Tasks: React.FC = () => {
         )}
       </div>
       
-      {/* Create Task Modal */}
       {showCreateForm && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="w-full max-w-md rounded-lg bg-white p-6">
@@ -213,7 +212,6 @@ const Tasks: React.FC = () => {
         </div>
       )}
       
-      {/* Edit Task Modal */}
       {taskToEdit && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="w-full max-w-md rounded-lg bg-white p-6">
@@ -230,7 +228,6 @@ const Tasks: React.FC = () => {
         </div>
       )}
       
-      {/* Share Task Modal */}
       {taskToShare && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="w-full max-w-md rounded-lg bg-white p-6">

@@ -21,13 +21,11 @@ const Login: React.FC = () => {
     
     try {
       if (isLogin) {
-        // Login
         const response = await login({ email, password });
         setUser(response.user);
         localStorage.setItem('user', JSON.stringify(response.user));
         navigate('/tasks');
       } else {
-        // Signup
         const response = await signup({ email, password, name });
         setUser(response.user);
         localStorage.setItem('user', JSON.stringify(response.user));

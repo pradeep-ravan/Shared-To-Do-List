@@ -5,7 +5,6 @@ interface JwtPayload {
   userId: string;
 }
 
-// Extend FastifyRequest to include the user property
 interface CustomRequest extends FastifyRequest {
   user?: {
     userId: string;

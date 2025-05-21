@@ -36,7 +36,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
       if (firebaseUser) {
-        // Check if we have user data in localStorage
         const userData = localStorage.getItem('user');
         if (userData) {
           setUser(JSON.parse(userData));
